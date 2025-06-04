@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_school_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: schooldb
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  api:
+    build: .
+    container_name: school_api
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: 127.0.0.1
+      DB_USER: root
+      DB_PASSWORD: 12345678
+      DB_NAME: schooldb
+      PORT: 3000
+
+volumes:
+  mysql-data:
