@@ -49,8 +49,9 @@ docker-compose up --build
 ```
 
 The application will be available at:
-- API: http://localhost:3000
-- MySQL: localhost:3307
+- API (Local): http://localhost:3000
+- API (Deployed): https://school-management-api-ye7e.onrender.com/
+- MySQL (Local Docker): localhost:3307
 
 ## 📚 API Endpoints
 
@@ -98,6 +99,8 @@ The API can be tested using the provided Postman collection. The collection incl
 - Example requests for both endpoints
 - Expected response formats
 - Test cases for validation
+
+To test the deployed API (available at [https://school-management-api-ye7e.onrender.com/](https://school-management-api-ye7e.onrender.com/)), update the base URL in your Postman collection from `http://localhost:3000` to the deployed URL.
 
 ## 📝 Database Schema
 
