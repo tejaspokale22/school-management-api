@@ -6,12 +6,14 @@ services:
     container_name: mysql_school_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_DATABASE: schooldb
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
+    networks:
+      - school-network
 
   api:
     build: .
@@ -22,11 +24,17 @@ services:
     depends_on:
       - db
     environment:
-      DB_HOST: 127.0.0.1
+      DB_HOST: db
       DB_USER: root
       DB_PASSWORD: 12345678
       DB_NAME: schooldb
       PORT: 3000
+    networks:
+      - school-network
 
 volumes:
   mysql-data:
+
+networks:
+  school-network:
+    driver: bridge

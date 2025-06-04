@@ -21,8 +21,8 @@ A Node.js API service for managing school data with location-based functionality
 
 Before you begin, ensure you have the following installed:
 - Node.js
-- MySQL
-- Docker (optional, for containerized deployment)
+- Docker and Docker Compose
+- Git
 
 ## 🔧 Installation
 
@@ -37,26 +37,20 @@ cd school-management-api
 npm install
 ```
 
-3. Create a `.env` file in the root directory:
-```env
-PORT=3000
-DB_HOST=localhost
-DB_USER=your_username
-DB_PASSWORD=your_password
-DB_NAME=school_management
-```
-
-4. Start the server:
-```bash
-npm start
-```
-
 ## 🐳 Docker Deployment
 
-Build and run using Docker Compose:
+1. Make sure no other MySQL instance is running on port 3306. If you have a local MySQL instance, you can either:
+   - Stop it temporarily
+   - Or use the Docker setup which uses port 3307 instead
+
+2. Build and run using Docker Compose:
 ```bash
 docker-compose up --build
 ```
+
+The application will be available at:
+- API: http://localhost:3000
+- MySQL: localhost:3307
 
 ## 📚 API Endpoints
 
@@ -117,6 +111,20 @@ CREATE TABLE schools (
     longitude FLOAT NOT NULL
 );
 ```
+
+## 🔧 Troubleshooting
+
+### Port Conflicts
+If you encounter port conflicts:
+1. For MySQL (3306):
+   - The Docker setup uses port 3307 to avoid conflicts
+   - If you need to use a different port, modify the `docker-compose.yml` file
+2. For API (3000):
+   - If port 3000 is in use, modify the port mapping in `docker-compose.yml`
+
+### Database Connection
+- The API service connects to the database using the service name `db`
+- If running locally without Docker, update the DB_HOST in `.env` to `localhost`
 
 ## 🤝 Contributing
 
